@@ -1,3 +1,3 @@
-let mensaje = "¡Bienvenido al sistema! Este mensaje se muestra en ambos lugares.";
+let mensaje = prompt("Ingrese un mensaje para mostrar en consola y alerta:");
 console.log(mensaje);
 alert(mensaje);
