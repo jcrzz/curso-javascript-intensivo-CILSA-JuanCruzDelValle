@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío 7 – Mostrar números</title>
+</head>
+<body>
+    <h1>Desafío 7 – Mostrar números</h1>
+    <div id="resultado"></div>
+
+    <script>
+        // Función que muestra un número en la página HTML
+        function mostrarNumero(numero) {
+            const resultadoDiv = document.getElementById('resultado');
+            const parrafo = document.createElement('p');
+            parrafo.textContent = `Número: ${numero}`;
+            resultadoDiv.appendChild(parrafo);
+        }
+
+        // Bucle for para mostrar los números del 1 al 10
+        for (let i = 1; i <= 10; i++) {
+            mostrarNumero(i);
+        }
+    </script>
+</body>
+</html>

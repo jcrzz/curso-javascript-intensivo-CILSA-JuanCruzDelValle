@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Desafío 4 - Modificación de Arreglos</title>
+
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <main class="contenedor">
+
+        <h1>Desafío 4: Modificación de Arreglos</h1>
+        <p class="subtitulo">Curso FullStack - Lista de Participantes</p>
+
+        <section class="tarjeta">
+            <h2>Lista Original</h2>
+            <ul id="lista-original" class="lista"></ul>
+        </section>
+
+        <section class="tarjeta">
+            <h2>Modificaciones Realizadas</h2>
+            <ul class="pasos">
+                <li class="paso eliminar">
+                    <span class="badge">Eliminar</span>
+                    Se eliminó a <strong>Susana</strong> (no asistió)
+                </li>
+                <li class="paso agregar">
+                    <span class="badge">Agregar</span>
+                    Se agregaron <strong>Roberto</strong> y <strong>Claudia</strong> después de <strong>Jesús</strong> y antes de <strong>Laura</strong>
+                </li>
+                <li class="paso agregar">
+                    <span class="badge">Agregar</span>
+                    Se agregó a <strong>José</strong> al final de la lista
+                </li>
+            </ul>
+        </section>
+
+        <section class="tarjeta destacada">
+            <h2>Lista Actualizada</h2>
+            <ul id="lista-actualizada" class="lista"></ul>
+            <p class="contador">Total de participantes: <span id="total">0</span></p>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
