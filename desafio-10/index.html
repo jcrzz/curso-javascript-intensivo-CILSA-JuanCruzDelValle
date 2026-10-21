@@ -4,68 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafío 10 – Ficha interactiva</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-        .formulario {
-            margin-bottom: 30px;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        textarea {
-            height: 80px;
-            resize: vertical;
-        }
-        button {
-            margin-top: 15px;
-            padding: 10px 25px;
-            font-size: 16px;
-            background-color: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #1976D2;
-        }
-        .ficha {
-            display: none;
-            margin-top: 30px;
-            padding: 25px;
-            border-radius: 10px;
-            background-color: #e3f2fd;
-            border: 2px solid #2196F3;
-        }
-        .ficha h2 {
-            margin-top: 0;
-            color: #1565C0;
-        }
-        .ficha .profesion {
-            color: #424242;
-            font-style: italic;
-            margin-bottom: 15px;
-        }
-        .ficha .descripcion {
-            color: #333;
-            line-height: 1.6;
-        }
-    </style>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
     <h1>Desafío 10 – Ficha interactiva</h1>
@@ -85,29 +24,6 @@
 
     <div id="ficha" class="ficha"></div>
 
-    <script>
-        function mostrarFicha() {
-            // Obtener los valores ingresados por el usuario
-            const nombre = document.getElementById('nombre').value;
-            const profesion = document.getElementById('profesion').value;
-            const descripcion = document.getElementById('descripcion').value;
-
-            // Seleccionar la ficha y mostrarla
-            const ficha = document.getElementById('ficha');
-            ficha.style.display = 'block';
-
-            // Aplicar cambios visuales con .style
-            ficha.style.backgroundColor = '#e8f5e9';
-            ficha.style.borderColor = '#4CAF50';
-            ficha.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-
-            // Mostrar la información usando .innerHTML
-            ficha.innerHTML = `
-                <h2>${nombre}</h2>
-                <p class="profesion">${profesion}</p>
-                <p class="descripcion">${descripcion}</p>
-            `;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

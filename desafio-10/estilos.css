@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.formulario {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 25px;
+    font-size: 16px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1976D2;
+}
+
+.ficha {
+    display: none;
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #e3f2fd;
+    border: 2px solid #2196F3;
+}
+
+.ficha h2 {
+    margin-top: 0;
+    color: #1565C0;
+}
+
+.ficha .profesion {
+    color: #424242;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.ficha .descripcion {
+    color: #333;
+    line-height: 1.6;
+}
