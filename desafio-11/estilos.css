@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 32px 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #222;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-bottom: 8px;
+    color: #fff;
+    text-align: center;
+}
+
+.subtitulo {
+    margin: 0 0 24px;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.tarjeta {
+    padding: 28px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.campo {
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    min-height: 42px;
+    padding: 9px 11px;
+    border: 1px solid #b8bec8;
+    border-radius: 6px;
+    font: inherit;
+}
+
+input:focus {
+    border-color: #667eea;
+    outline: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+input[aria-invalid="true"] {
+    border-color: #c62828;
+}
+
+.ayuda,
+.error {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.875rem;
+}
+
+.ayuda {
+    color: #555;
+}
+
+.error {
+    color: #b71c1c;
+}
+
+button {
+    width: 100%;
+    margin-top: 4px;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 6px;
+    background-color: #4b5fc7;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #394ba8;
+}
+
+button:focus-visible {
+    outline: 3px solid #222;
+    outline-offset: 3px;
+}
+
+.resultado {
+    margin: 16px 0 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.resultado.exito {
+    color: #20733b;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 24px 12px;
+    }
+
+    .tarjeta {
+        padding: 20px;
+    }
+}

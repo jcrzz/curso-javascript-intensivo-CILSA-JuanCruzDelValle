@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío 11 – Formulario de registro</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <main class="contenedor">
+        <h1>Desafío 11: Formulario de registro</h1>
+        <p class="subtitulo">Completa tus datos para crear una cuenta</p>
+
+        <form id="formulario-registro" class="tarjeta" novalidate>
+            <div class="campo">
+                <label for="usuario">Usuario</label>
+                <input
+                    type="text"
+                    id="usuario"
+                    name="usuario"
+                    autocomplete="username"
+                    aria-describedby="error-usuario"
+                    required
+                >
+                <small class="error" id="error-usuario"></small>
+            </div>
+
+            <div class="campo">
+                <label for="correo">Correo electrónico</label>
+                <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    autocomplete="email"
+                    aria-describedby="error-correo"
+                    required
+                >
+                <small class="error" id="error-correo"></small>
+            </div>
+
+            <div class="campo">
+                <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                <input
+                    type="date"
+                    id="fecha-nacimiento"
+                    name="fecha-nacimiento"
+                    autocomplete="bday"
+                    aria-describedby="error-fecha-nacimiento"
+                    required
+                >
+                <small class="error" id="error-fecha-nacimiento"></small>
+            </div>
+
+            <div class="campo">
+                <label for="contrasena">Contraseña</label>
+                <input
+                    type="password"
+                    id="contrasena"
+                    name="contrasena"
+                    autocomplete="new-password"
+                    aria-describedby="error-contrasena"
+                    required
+                >
+                <small class="ayuda">Al menos 6 caracteres, con letras y números.</small>
+                <small class="error" id="error-contrasena"></small>
+            </div>
+
+            <div class="campo">
+                <label for="confirmar-contrasena">Confirmar contraseña</label>
+                <input
+                    type="password"
+                    id="confirmar-contrasena"
+                    name="confirmar-contrasena"
+                    autocomplete="new-password"
+                    aria-describedby="error-confirmar-contrasena"
+                    required
+                >
+                <small class="error" id="error-confirmar-contrasena"></small>
+            </div>
+
+            <button type="submit">Registrarme</button>
+            <p id="resultado" class="resultado" role="status" aria-live="polite"></p>
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

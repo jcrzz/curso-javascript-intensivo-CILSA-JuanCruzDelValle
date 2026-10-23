@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trabajo Final del Curso Intensivo de JavaScript de CILSA: gestor de tareas accesible, responsive y con persistencia en el navegador.">
+    <meta name="author" content="Curso Intensivo de JavaScript - CILSA">
+    <title>TP Final CILSA · Gestor de Tareas</title>
+
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Script con "defer": se ejecuta cuando el HTML ya estáparseado (buena práctica) -->
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- =================================================================
+            MEJORA DE ACCESIBILIDAD #1: Enlace de salto.
+            Permite a las personas que navegan con lector de pantalla o teclado
+            saltar el contenido repetido y llegar directo al <main>.
+            ================================================================= -->
+    <a class="saltar-contenido" href="#contenido-principal">Saltar al contenido principal</a>
+
+    <!-- ====================== HEADER ====================== -->
+    <header class="encabezado">
+        <div class="encabezado__marca">
+            <p class="etiqueta">CILSA · Curso Intensivo de JavaScript</p>
+            <h1>Gestor de Tareas</h1>
+            <p class="encabezado__descripcion">
+                Creá, filtrá y completá tus tareas.
+                Sin conexión y se guarda automáticamente en tu navegador.
+            </p>
+        </div>
+
+        <!--
+            MEJORA DE ACCESIBILIDAD #1: Barra de herramientas de accesibilidad.
+            - Botón de modo de alto contraste / oscuro (aria-pressed).
+            - Botones A+ / A- para cambiar dinámicamente el tamaño de la letra.
+        -->
+        <div class="barra-accesibilidad" role="group" aria-labelledby="titulo-accesibilidad">
+            <h2 class="barra-accesibilidad__titulo" id="titulo-accesibilidad">Accesibilidad</h2>
+
+            <button type="button" id="btn-tema" class="boton boton--herramienta" aria-pressed="false"
+                    aria-label="Activar modo oscuro de alto contraste">
+                <span class="boton__icono" aria-hidden="true">◐</span>
+                <span id="texto-btn-tema">Modo oscuro</span>
+            </button>
+
+            <button type="button" id="btn-texto-mas" class="boton boton--herramienta boton--letra"
+                    aria-label="Aumentar el tamaño del texto">
+                A+
+            </button>
+
+            <button type="button" id="btn-texto-menos" class="boton boton--herramienta boton--letra"
+                    aria-label="Reducir el tamaño del texto">
+                A−
+            </button>
+
+            <button type="button" id="btn-texto-reset" class="boton boton--herramienta"
+                    aria-label="Restablecer el contraste y el tamaño de letra originales">
+                Restablecer
+            </button>
+        </div>
+    </header>
+
+    <!-- ====================== NAVEGACIÓN / FILTROS ====================== -->
+    <nav class="navegacion" aria-label="Filtrar las tareas por estado">
+        <h2 class="navegacion__titulo" id="titulo-navegacion">Filtros por estado</h2>
+        <ul class="navegacion__lista">
+            <li>
+                <button type="button" class="filtro" data-filtro="todas" aria-pressed="true">
+                    Todas <span class="filtro__conteo" id="conteo-todas">0</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="filtro" data-filtro="pendientes" aria-pressed="false">
+                    Pendientes <span class="filtro__conteo" id="conteo-pendientes">0</span>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="filtro" data-filtro="completadas" aria-pressed="false">
+                    Completadas <span class="filtro__conteo" id="conteo-completadas">0</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ====================== CONTENIDO PRINCIPAL ====================== -->
+    <main id="contenido-principal" class="contenedor">
+
+        <!--
+            MEJORA DE ACCESIBILIDAD #3: Región "live".
+            aria-live="polite" + role="status" anuncian los mensajes de
+            error y de confirmación sin interrumpir la lectura en curso.
+        -->
+        <p id="mensaje-estado" class="mensaje" role="status" aria-live="polite" aria-atomic="true"></p>
+
+        <!-- ---------- Panel 1: Formulario ---------- -->
+        <section class="panel" aria-labelledby="titulo-formulario">
+            <h2 id="titulo-formulario">Nueva tarea</h2>
+
+            <!-- novalidate: la validación la hacemos en JavaScript con mensajes propios -->
+            <form id="formulario-tarea" novalidate>
+                <div class="campo">
+                    <label for="tarea-nombre">Nombre de la tarea</label>
+                    <input type="text" id="tarea-nombre" name="nombre" maxlength="80"
+                            placeholder="Ej: Presentar el trabajo final"
+                            autocomplete="off"
+                            aria-describedby="ayuda-nombre error-nombre">
+                    <p class="ayuda" id="ayuda-nombre">Debe tener entre 3 y 80 caracteres.</p>
+                    <p class="error-campo" id="error-nombre"></p>
+                </div>
+
+                <div class="campo">
+                    <label for="tarea-categoria">Categoría</label>
+                    <select id="tarea-categoria" name="categoria" aria-describedby="error-categoria">
+                        <option value="">Seleccioná una categoría</option>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="estudio">Estudio</option>
+                        <option value="personal">Personal</option>
+                        <option value="hogar">Hogar</option>
+                        <option value="salud">Salud</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <p class="error-campo" id="error-categoria"></p>
+                </div>
+
+                <div class="campo">
+                    <label for="tarea-prioridad">Prioridad</label>
+                    <select id="tarea-prioridad" name="prioridad" aria-describedby="error-prioridad">
+                        <option value="">Seleccioná una prioridad</option>
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                        <option value="baja">Baja</option>
+                    </select>
+                    <p class="error-campo" id="error-prioridad"></p>
+                </div>
+
+                <div class="campo">
+                    <label for="tarea-fecha">Fecha límite (opcional)</label>
+                    <input type="date" id="tarea-fecha" name="fecha" aria-describedby="error-fecha">
+                    <p class="error-campo" id="error-fecha"></p>
+                </div>
+
+                <div class="acciones-formulario">
+                    <button type="submit" id="btn-guardar" class="boton boton--principal">Agregar tarea</button>
+                    <button type="button" id="btn-cancelar" class="boton boton--secundario" hidden>
+                        Cancelar edición
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- ---------- Panel 2: Resumen y contadores ---------- -->
+        <section class="panel" aria-labelledby="titulo-resumen">
+            <h2 id="titulo-resumen">Resumen</h2>
+
+            <ul class="contadores">
+                <li class="contador">
+                    <span class="contador__valor" id="contador-total">0</span>
+                    <span class="contador__etiqueta">Total</span>
+                </li>
+                <li class="contador contador--pendientes">
+                    <span class="contador__valor" id="contador-pendientes">0</span>
+                    <span class="contador__etiqueta">Pendientes</span>
+                </li>
+                <li class="contador contador--completadas">
+                    <span class="contador__valor" id="contador-completadas">0</span>
+                    <span class="contador__etiqueta">Completadas</span>
+                </li>
+            </ul>
+
+            <p class="progreso" id="etiqueta-progreso">
+                Avance: <span id="porcentaje-avance">0%</span>
+            </p>
+            <progress id="progreso" value="0" max="100" aria-labelledby="etiqueta-progreso">0%</progress>
+
+            <button type="button" id="btn-limpiar-completadas" class="boton boton--secundario">
+                Borrar tareas completadas
+            </button>
+        </section>
+
+        <!-- ---------- Panel 3: Lista de tareas ---------- -->
+        <section class="panel panel--lista" aria-labelledby="titulo-lista">
+            <h2 id="titulo-lista" tabindex="-1">Mis tareas</h2>
+
+            <div class="controles-lista">
+                <div class="campo campo--compacto">
+                    <label for="busqueda">Buscar tarea</label>
+                    <input type="search" id="busqueda" placeholder="Escribí para filtrar..." autocomplete="off">
+                </div>
+
+                <div class="campo campo--compacto">
+                    <label for="filtro-categoria">Filtrar por categoría</label>
+                    <select id="filtro-categoria">
+                        <option value="">Todas las categorías</option>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="estudio">Estudio</option>
+                        <option value="personal">Personal</option>
+                        <option value="hogar">Hogar</option>
+                        <option value="salud">Salud</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- La lista se completa dinámicamente desde script.js -->
+            <ul id="lista-tareas" class="lista-tareas"></ul>
+
+            <p id="lista-vacia" class="lista-vacia" hidden></p>
+        </section>
+    </main>
+    <!-- ====================== FOOTER ====================== -->
+    <footer class="pie">
+        <p><strong>Trabajo Final · Curso Intensivo de JavaScript — CILSA</strong></p>
+        <p>HTML5 · CSS3 · JavaScript Vanilla (sin frameworks) · Accesibilidad WCAG</p>
+    </footer>
+
+    <noscript>
+        <p class="mensaje mensaje--error">
+            Necesitás habilitar JavaScript en tu navegador para usar el gestor de tareas.
+        </p>
+    </noscript>
+</body>
+</html>

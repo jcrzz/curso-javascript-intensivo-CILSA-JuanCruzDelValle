@@ -1,0 +1,876 @@
+/* =====================================================================
+    TRABAJO FINAL CILSA · Gestor de Tareas
+    Hoja de estilos — CSS3 con variables personalizadas
+    ---------------------------------------------------------------------
+    Todas las decisiones de color, tipografía y espaciado se controlan
+    desde las variables del bloque :root. Gracias a esto, el modo de alto
+    contraste y el cambio de tamaño de letra se resuelven SIN duplicar
+    una sola regla de estilo.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+    1. VARIABLES GLOBALES (tema claro)
+   --------------------------------------------------------------------- */
+:root {
+    /* Tamaño base de la tipografía: se modifica desde JavaScript (A+ / A−) */
+    --tamano-base: 16px;
+
+    /* Paleta de colores del tema claro */
+    --color-fondo: #eef2f7;
+    --color-fondo-degradado: #dfe6f2;
+    --color-superficie: #ffffff;
+    --color-superficie-alterna: #f8fafc;
+    --color-texto: #16233a;
+    --color-texto-suave: #4a5a72;
+    --color-borde: #d5dde8;
+    --color-borde-fuerte: #b8c4d4;
+
+    /* Color principal (botones y acentos) */
+    --color-primario: #3b34c7;
+    --color-primario-hover: #2c26a0;
+    --color-primario-contraste: #ffffff;
+    --color-primario-tenue: #e7e5fb;
+
+    /* Colores semánticos */
+    --color-exito: #0f6b3b;
+    --color-exito-fondo: #dcfce7;
+    --color-error: #a01523;
+    --color-error-fondo: #fde4e6;
+    --color-error-contraste: #ffffff;
+    --color-aviso: #8a4b00;
+    --color-aviso-fondo: #fdf0d5;
+
+    /* Prioridades */
+    --color-prioridad-alta: #b91c1c;
+    --color-prioridad-media: #a16207;
+    --color-prioridad-baja: #15803d;
+
+    /* Métricas de diseño */
+    --radio-borde: 14px;
+    --radio-borde-pequeno: 9px;
+    --sombra: 0 10px 28px rgba(15, 23, 42, 0.10);
+    --sombra-suave: 0 2px 8px rgba(15, 23, 42, 0.06);
+    --ancho-maximo: 1080px;
+
+    /* Anillo de foco visible para navegación por teclado */
+    --anillo-foco: 3px solid #1d4ed8;
+    --offset-foco: 3px;
+}
+
+/* ---------------------------------------------------------------------
+    2. TEMA OSCURO / ALTO CONTRASTE
+    Se activa con <html data-tema="alto-contraste"> desde script.js.
+   --------------------------------------------------------------------- */
+[data-tema="alto-contraste"] {
+    --color-fondo: #000000;
+    --color-fondo-degradado: #000000;
+    --color-superficie: #0d0d0d;
+    --color-superficie-alterna: #171717;
+    --color-texto: #ffffff;
+    --color-texto-suave: #e5e7eb;
+    --color-borde: #525252;
+    --color-borde-fuerte: #737373;
+
+    /* Amarillo sobre negro: la combinación con mayor relación de contraste */
+    --color-primario: #ffd60a;
+    --color-primario-hover: #ffe452;
+    --color-primario-contraste: #000000;
+    --color-primario-tenue: #3a2f00;
+
+    --color-exito: #4ade80;
+    --color-exito-fondo: #052e16;
+    --color-error: #ff8b95;
+    --color-error-fondo: #3d0a10;
+    --color-error-contraste: #000000;
+    --color-aviso: #fcd34d;
+    --color-aviso-fondo: #3a2a05;
+
+    --color-prioridad-alta: #ff8b95;
+    --color-prioridad-media: #fcd34d;
+    --color-prioridad-baja: #4ade80;
+
+    --sombra: 0 0 0 2px #525252;
+    --sombra-suave: none;
+    --anillo-foco: 3px solid #ffd60a;
+}
+
+/* ---------------------------------------------------------------------
+    3. RESET BÁSICO Y BASE
+   --------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    /* La tipografía se mide en rem: cambiar --tamano-base escala todo */
+    font-size: var(--tamano-base);
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0 20px 48px;
+    background: linear-gradient(180deg, var(--color-fondo) 0%, var(--color-fondo-degradado) 100%);
+    color: var(--color-texto);
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    line-height: 1.25;
+    color: var(--color-texto);
+}
+
+code {
+    padding: 1px 5px;
+    border-radius: 5px;
+    background: var(--color-primario-tenue);
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.92em;
+}
+
+kbd {
+    padding: 1px 6px;
+    border: 1px solid var(--color-borde-fuerte);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    background: var(--color-superficie-alterna);
+    font-family: inherit;
+    font-size: 0.88em;
+}
+
+/* ---------------------------------------------------------------------
+    4. UTILIDADES DE ACCESIBILIDAD
+   --------------------------------------------------------------------- */
+
+/* Enlace de salto: oculto visualmente hasta recibir el foco */
+.saltar-contenido {
+    position: absolute;
+    left: 50%;
+    top: -100px;
+    z-index: 100;
+    padding: 12px 22px;
+    border-radius: 0 0 var(--radio-borde-pequeno) var(--radio-borde-pequeno);
+    background: var(--color-primario);
+    color: var(--color-primario-contraste);
+    font-weight: 700;
+    text-decoration: none;
+    transform: translateX(-50%);
+    transition: top 0.2s ease;
+}
+
+.saltar-contenido:focus {
+    top: 0;
+}
+
+/* Texto sólo para lectores de pantalla */
+.visualmente-oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Indicador visual claro de foco para navegación por teclado */
+:focus-visible {
+    outline: var(--anillo-foco);
+    outline-offset: var(--offset-foco);
+    border-radius: 4px;
+}
+
+/* ---------------------------------------------------------------------
+    5. ENCABEZADO Y BARRA DE ACCESIBILIDAD
+   --------------------------------------------------------------------- */
+.encabezado {
+    max-width: var(--ancho-maximo);
+    margin: 0 auto;
+    padding: 36px 0 26px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 22px;
+}
+
+.etiqueta {
+    margin: 0 0 6px;
+    color: var(--color-primario);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.encabezado h1 {
+    margin: 0;
+    font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+}
+
+.encabezado__descripcion {
+    max-width: 46ch;
+    margin: 10px 0 0;
+    color: var(--color-texto-suave);
+}
+
+.barra-accesibilidad {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    background: var(--color-superficie);
+    box-shadow: var(--sombra-suave);
+}
+
+.barra-accesibilidad__titulo {
+    margin: 0 6px 0 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+}
+
+/* ---------------------------------------------------------------------
+    6. NAVEGACIÓN / FILTROS
+   --------------------------------------------------------------------- */
+.navegacion {
+    max-width: var(--ancho-maximo);
+    margin: 0 auto 22px;
+    padding: 14px 18px;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    background: var(--color-superficie);
+    box-shadow: var(--sombra-suave);
+}
+
+.navegacion__titulo {
+    margin: 0 0 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-texto-suave);
+}
+
+.navegacion__lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.filtro {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border: 1px solid var(--color-borde-fuerte);
+    border-radius: 999px;
+    background: var(--color-superficie-alterna);
+    color: var(--color-texto);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.filtro:hover {
+    border-color: var(--color-primario);
+    color: var(--color-primario);
+}
+
+.filtro[aria-pressed="true"] {
+    background: var(--color-primario);
+    border-color: var(--color-primario);
+    color: var(--color-primario-contraste);
+}
+
+.filtro__conteo {
+    min-width: 24px;
+    padding: 1px 7px;
+    border-radius: 999px;
+    background: rgba(120, 130, 150, 0.22);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* ---------------------------------------------------------------------
+    7. ESTRUCTURA GENERAL Y PANELES
+   --------------------------------------------------------------------- */
+.contenedor {
+    max-width: var(--ancho-maximo);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    align-items: start;
+}
+
+.panel {
+    padding: 26px;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    background: var(--color-superficie);
+    box-shadow: var(--sombra);
+}
+
+.panel h2 {
+    margin: 0 0 18px;
+    font-size: 1.3rem;
+}
+
+.panel--lista {
+    grid-column: 1 / -1;
+}
+
+/* ---------------------------------------------------------------------
+    8. FORMULARIO
+   --------------------------------------------------------------------- */
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.campo label {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="search"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 11px 13px;
+    border: 2px solid var(--color-borde-fuerte);
+    border-radius: var(--radio-borde-pequeno);
+    background: var(--color-superficie-alterna);
+    color: var(--color-texto);
+    font: inherit;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+input[type="text"]:hover,
+input[type="search"]:hover,
+input[type="date"]:hover,
+select:hover {
+    border-color: var(--color-primario);
+}
+
+/* Campo marcado como inválido por la validación de JavaScript */
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+    border-color: var(--color-error);
+    background: var(--color-error-fondo);
+}
+
+.ayuda {
+    margin: 0;
+    color: var(--color-texto-suave);
+    font-size: 0.83rem;
+}
+
+.error-campo {
+    margin: 0;
+    color: var(--color-error);
+    font-size: 0.87rem;
+    font-weight: 600;
+}
+
+.error-campo:empty {
+    display: none;
+}
+
+.acciones-formulario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* ---------------------------------------------------------------------
+    9. BOTONES
+   --------------------------------------------------------------------- */
+.boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 11px 20px;
+    border: 2px solid transparent;
+    border-radius: var(--radio-borde-pequeno);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.boton--principal {
+    background: var(--color-primario);
+    color: var(--color-primario-contraste);
+}
+
+.boton--principal:hover {
+    background: var(--color-primario-hover);
+}
+
+.boton--secundario {
+    background: var(--color-superficie-alterna);
+    border-color: var(--color-borde-fuerte);
+    color: var(--color-texto);
+}
+
+.boton--secundario:hover {
+    border-color: var(--color-primario);
+    color: var(--color-primario);
+}
+
+/* Botones de la barra de accesibilidad */
+.boton--herramienta {
+    padding: 8px 13px;
+    background: var(--color-superficie-alterna);
+    border-color: var(--color-borde-fuerte);
+    color: var(--color-texto);
+    font-size: 0.9rem;
+}
+
+.boton--herramienta:hover {
+    border-color: var(--color-primario);
+    color: var(--color-primario);
+}
+
+.boton--herramienta[aria-pressed="true"] {
+    background: var(--color-primario);
+    border-color: var(--color-primario);
+    color: var(--color-primario-contraste);
+}
+
+.boton--letra {
+    min-width: 44px;
+    font-size: 1rem;
+}
+
+.boton__icono {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+/* ---------------------------------------------------------------------
+    10. RESUMEN Y CONTADORES
+   --------------------------------------------------------------------- */
+.contadores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 0 18px;
+    padding: 0;
+    list-style: none;
+}
+
+.contador {
+    flex: 1 1 90px;
+    padding: 14px 10px;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde-pequeno);
+    background: var(--color-superficie-alterna);
+    text-align: center;
+}
+
+.contador__valor {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--color-primario);
+}
+
+.contador__etiqueta {
+    font-size: 0.83rem;
+    color: var(--color-texto-suave);
+}
+
+.contador--pendientes .contador__valor {
+    color: var(--color-aviso);
+}
+
+.contador--completadas .contador__valor {
+    color: var(--color-exito);
+}
+
+.progreso {
+    margin: 0 0 8px;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+progress {
+    width: 100%;
+    height: 14px;
+    margin-bottom: 18px;
+    border: 1px solid var(--color-borde-fuerte);
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--color-superficie-alterna);
+    accent-color: var(--color-primario);
+}
+
+progress::-webkit-progress-bar {
+    background: var(--color-superficie-alterna);
+}
+
+progress::-webkit-progress-value {
+    background: var(--color-primario);
+}
+
+progress::-moz-progress-bar {
+    background: var(--color-primario);
+}
+
+/* ---------------------------------------------------------------------
+    11. LISTA DE TAREAS
+   --------------------------------------------------------------------- */
+.controles-lista {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.campo--compacto {
+    margin-bottom: 0;
+}
+
+.lista-tareas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tarea-item {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tarea {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 1px solid var(--color-borde);
+    border-left: 5px solid var(--color-primario);
+    border-radius: var(--radio-borde-pequeno);
+    background: var(--color-superficie-alterna);
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.tarea:hover {
+    border-color: var(--color-primario);
+}
+
+.tarea__principal {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 1 1 260px;
+}
+
+.tarea__check {
+    width: 22px;
+    height: 22px;
+    margin: 3px 0 0;
+    accent-color: var(--color-primario);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.tarea__datos {
+    min-width: 0;
+}
+
+.tarea__titulo {
+    margin: 0 0 8px;
+    font-size: 1.02rem;
+    word-break: break-word;
+}
+
+/* Tarea completada: se marca visualmente y con texto para el lector */
+.tarea.es-completada {
+    border-left-color: var(--color-exito);
+    opacity: 0.85;
+}
+
+.tarea.es-completada .tarea__titulo {
+    text-decoration: line-through;
+    color: var(--color-texto-suave);
+}
+
+.tarea__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+}
+
+.etiqueta-tarea {
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--color-primario-tenue);
+    color: var(--color-primario);
+    font-weight: 700;
+}
+
+.etiqueta-tarea--prioridad-alta {
+    background: var(--color-error-fondo);
+    color: var(--color-prioridad-alta);
+}
+
+.etiqueta-tarea--prioridad-media {
+    background: var(--color-aviso-fondo);
+    color: var(--color-prioridad-media);
+}
+
+.etiqueta-tarea--prioridad-baja {
+    background: var(--color-exito-fondo);
+    color: var(--color-prioridad-baja);
+}
+
+.tarea__fecha {
+    font-style: italic;
+}
+
+.tarea__fecha.es-vencida {
+    color: var(--color-error);
+    font-style: normal;
+    font-weight: 700;
+}
+
+.tarea__estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--color-exito-fondo);
+    color: var(--color-exito);
+    font-weight: 700;
+}
+
+.tarea__acciones {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.boton--icono {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: var(--color-superficie);
+    border-color: var(--color-borde-fuerte);
+    color: var(--color-texto-suave);
+}
+
+.boton--icono:hover {
+    border-color: var(--color-primario);
+    color: var(--color-primario);
+}
+
+.boton--icono .icono {
+    width: 19px;
+    height: 19px;
+    fill: currentColor;
+}
+
+/* Confirmación de borrado dentro de la propia tarjeta (sin alert ni confirm) */
+.tarea__confirmacion {
+    flex: 1 1 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border: 1px dashed var(--color-error);
+    border-radius: var(--radio-borde-pequeno);
+    background: var(--color-error-fondo);
+}
+
+.tarea__confirmacion p {
+    margin: 0;
+    flex: 1 1 200px;
+    font-weight: 700;
+    color: var(--color-error);
+}
+
+.boton--peligro {
+    background: var(--color-error);
+    color: var(--color-error-contraste);
+}
+
+.boton--peligro:hover {
+    background: var(--color-prioridad-alta);
+    color: var(--color-error-contraste);
+}
+
+/* Botón deshabilitado (ej: "Borrar tareas completadas" sin tareas completadas) */
+.boton:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.lista-vacia {
+    margin: 0;
+    padding: 26px 18px;
+    border: 1px dashed var(--color-borde-fuerte);
+    border-radius: var(--radio-borde-pequeno);
+    background: var(--color-superficie-alterna);
+    color: var(--color-texto-suave);
+    text-align: center;
+}
+
+/* ---------------------------------------------------------------------
+    12. MENSAJES (región aria-live)
+   --------------------------------------------------------------------- */
+.mensaje {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 0;
+    border-radius: var(--radio-borde-pequeno);
+    font-weight: 600;
+    transition: padding 0.15s ease;
+}
+
+/* Cuando está vacío no ocupa lugar pero sigue en el DOM (importante
+   para que los lectores de pantalla detecten los cambios) */
+.mensaje:empty {
+    padding: 0;
+    border: 0;
+}
+
+.mensaje:not(:empty) {
+    padding: 13px 16px;
+    border: 1px solid var(--color-borde-fuerte);
+    background: var(--color-superficie-alterna);
+}
+
+.mensaje[data-tipo="exito"]:not(:empty) {
+    border-color: var(--color-exito);
+    background: var(--color-exito-fondo);
+    color: var(--color-exito);
+}
+
+.mensaje[data-tipo="error"]:not(:empty) {
+    border-color: var(--color-error);
+    background: var(--color-error-fondo);
+    color: var(--color-error);
+}
+
+.mensaje[data-tipo="info"]:not(:empty) {
+    border-color: var(--color-primario);
+    background: var(--color-primario-tenue);
+    color: var(--color-primario);
+}
+/* ---------------------------------------------------------------------
+    14. PIE DE PÁGINA
+   --------------------------------------------------------------------- */
+.pie {
+    max-width: var(--ancho-maximo);
+    margin: 34px auto 0;
+    padding: 22px 0 0;
+    border-top: 1px solid var(--color-borde);
+    color: var(--color-texto-suave);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.pie p {
+    margin: 4px 0;
+}
+
+/* ---------------------------------------------------------------------
+    15. RESPONSIVE (mobile first invertido: se ajusta hacia abajo)
+   --------------------------------------------------------------------- */
+@media (max-width: 880px) {
+    .contenedor {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .controles-lista {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .encabezado {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 560px) {
+    body {
+        padding: 0 14px 36px;
+    }
+
+    .panel {
+        padding: 20px 16px;
+    }
+
+    .tarea {
+        flex-direction: column;
+    }
+
+    .tarea__acciones {
+        align-self: flex-end;
+    }
+
+    .barra-accesibilidad {
+        width: 100%;
+    }
+}
+
+/* ---------------------------------------------------------------------
+    16. PREFERENCIAS DEL SISTEMA
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Impresión: la app no se usa impresa, pero se muestra prolija */
+@media print {
+    .barra-accesibilidad,
+    .navegacion,
+    .acciones-formulario,
+    .tarea__acciones {
+        display: none;
+    }
+}

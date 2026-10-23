@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 48px 20px;
+    background: #f1f5f9;
+    color: #1e293b;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.encabezado {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.etiqueta {
+    margin: 0 0 10px;
+    color: #4f46e5;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    color: #172554;
+    font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.encabezado > p:last-child {
+    margin: 12px 0 0;
+    color: #64748b;
+}
+
+.tarjeta,
+.explicacion {
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.tarjeta-encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.tarjeta-encabezado h2,
+.explicacion h2 {
+    margin: 0;
+    color: #172554;
+}
+
+.tarjeta-encabezado p {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+.controles {
+    display: flex;
+    gap: 8px;
+    padding: 4px;
+    border-radius: 10px;
+    background: #f1f5f9;
+}
+
+.controles button {
+    padding: 9px 14px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #475569;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.controles button[aria-pressed="true"] {
+    background: #4f46e5;
+    color: #fff;
+}
+
+.controles button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #a5b4fc;
+    outline-offset: 3px;
+}
+
+.grafico {
+    position: relative;
+    height: 360px;
+}
+
+.explicacion {
+    margin-top: 20px;
+    line-height: 1.65;
+}
+
+.explicacion p {
+    margin: 14px 0 0;
+    color: #475569;
+}
+
+a {
+    color: #4338ca;
+    font-weight: 600;
+}
+
+.documentacion {
+    padding-top: 14px;
+    border-top: 1px solid #e2e8f0;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 32px 14px;
+    }
+
+    .tarjeta,
+    .explicacion {
+        padding: 20px;
+    }
+
+    .tarjeta-encabezado {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .grafico {
+        height: 280px;
+    }
+}

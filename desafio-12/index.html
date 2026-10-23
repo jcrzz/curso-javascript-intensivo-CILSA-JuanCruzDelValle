@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío 12 – Explorando Chart.js</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <main class="contenedor">
+        <header class="encabezado">
+            <p class="etiqueta">Desafío 12 · Librerías de JavaScript</p>
+            <h1>Un gráfico, dos formas de verlo</h1>
+            <p>Explorá los libros leídos cada mes y cambiá el tipo de gráfico.</p>
+        </header>
+
+        <section class="tarjeta" aria-labelledby="titulo-grafico">
+            <div class="tarjeta-encabezado">
+                <div>
+                    <h2 id="titulo-grafico">Lecturas del año</h2>
+                    <p>Libros leídos por mes · datos de ejemplo</p>
+                </div>
+                <div class="controles" role="group" aria-label="Tipo de gráfico">
+                    <button type="button" data-chart-type="bar" aria-pressed="true">Barras</button>
+                    <button type="button" data-chart-type="line" aria-pressed="false">Línea</button>
+                </div>
+            </div>
+
+            <div class="grafico">
+                <canvas
+                    id="grafico-lecturas"
+                    role="img"
+                    aria-label="Gráfico de barras con los libros leídos de enero a junio: 3, 5, 4, 7, 6 y 9."
+                >
+                    Tu navegador no puede mostrar este gráfico.
+                </canvas>
+            </div>
+        </section>
+
+        <section class="explicacion" aria-labelledby="titulo-explicacion">
+            <h2 id="titulo-explicacion">¿Qué librería utilicé?</h2>
+            <p>
+                <a href="https://www.chartjs.org/" target="_blank" rel="noreferrer">Chart.js</a>
+                es una librería de JavaScript para crear gráficos interactivos en páginas web.
+                La incorporé desde su CDN y la usé para mostrar la cantidad de libros leídos
+                de enero a junio.
+            </p>
+            <p>
+                Los botones cambian el gráfico entre barras y línea. Me resultó interesante que
+                Chart.js genera el gráfico, las etiquetas y la interacción a partir de los datos
+                y una configuración, en lugar de tener que dibujar cada elemento manualmente
+                con JavaScript y HTML.
+            </p>
+            <p class="documentacion">
+                Documentación oficial:
+                <a href="https://www.chartjs.org/docs/latest/" target="_blank" rel="noreferrer">Chart.js Docs</a>
+            </p>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
