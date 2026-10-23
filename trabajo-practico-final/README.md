@@ -12,7 +12,6 @@ trabajo-practico-final/
 ├── index.html          # Estructura semántica HTML5 + región aria-live + guía de defensa
 ├── styles.css          # Variables CSS, tema claro/alto contraste, diseño responsive
 ├── script.js           # Lógica de la app en JavaScript (12 secciones comentadas)
-├── GUIA-DEFENSA.md     # Guía para la presentación oral (copia imprimible)
 └── README.md           # Este archivo
 ```
 
@@ -72,10 +71,3 @@ trabajo-practico-final/
 | Categoría | Debe ser una de las 6 permitidas | *"Seleccioná una categoría para la tarea."* |
 | Prioridad | Debe ser Alta, Media o Baja | *"Seleccioná una prioridad para la tarea."* |
 | Fecha | Opcional, pero no puede estar vencida | *"La fecha límite no puede ser anterior a hoy."* |
-
----
-
-## 🎤 Presentación oral
-
-La **Guía para la Defensa del Proyecto** está incluida dentro de `index.html`
-(última sección de la página) y en `GUIA-DEFENSA.md` para imprimir.
